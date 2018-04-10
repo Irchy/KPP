@@ -1,9 +1,11 @@
 package Main;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
+
 
 /**
  * The program solution of the equation by selection method.
@@ -14,11 +16,12 @@ import java.text.NumberFormat;
  */
 
 public class Window extends JFrame {
-    JLabel labelFirstSummand, labelEqually, labelStartInterval, labelEndInterval, labelRoot;
+    JLabel labelRoot, labelStartInterval, labelEndInterval;
     JFormattedTextField textFieldSecondSummand, textFieldSum, textFieldStartInterval, textFieldEndInterval;
     JButton buttonAssortRoot;
     ListenerForButton listnerForButton = new ListenerForButton();
     int secondSummand, sum, startInterval, endInterval, result;
+
 
     /**
      * This is constructor. Here are components declared and
@@ -28,11 +31,15 @@ public class Window extends JFrame {
     public Window() {
         super("laba1");
 
-        labelFirstSummand = new JLabel("x +");
-        labelEqually = new JLabel(" = ");
-        labelStartInterval = new JLabel("Начало интервала");
-        labelEndInterval = new JLabel("Конец интервала");
         labelRoot = new JLabel("Корень");
+        labelRoot.setOpaque(true);
+        //labelRoot.setBackground(Color.orange);
+        labelStartInterval = new JLabel("Начало интервала");
+        labelStartInterval.setOpaque(true);
+        //labelStartInterval.setBackground(Color.orange);
+        labelEndInterval = new JLabel("Конец интервала");
+        labelEndInterval.setOpaque(true);
+        //labelEndInterval.setBackground(Color.orange);
         textFieldSecondSummand = new JFormattedTextField(NumberFormat.getIntegerInstance());
         textFieldSum = new JFormattedTextField(NumberFormat.getIntegerInstance());
         textFieldStartInterval = new JFormattedTextField(NumberFormat.getIntegerInstance());
@@ -40,8 +47,6 @@ public class Window extends JFrame {
         buttonAssortRoot = new JButton("Подобрать корень");
 
         buttonAssortRoot.addActionListener(listnerForButton);
-
-        dispositionElement();
     }
 
     /**
@@ -49,73 +54,121 @@ public class Window extends JFrame {
      * using HorizontalBox and VerticalBox.
      */
 
-    public void dispositionElement(){
-        Box box1 = Box.createHorizontalBox();
-        box1.add(Box.createHorizontalStrut(15));
-        box1.add(labelFirstSummand);
-        box1.add(Box.createHorizontalStrut(10));
-        box1.add(textFieldSecondSummand);
-        box1.add(Box.createHorizontalStrut(10));
-        box1.add(labelEqually);
-        box1.add(Box.createHorizontalStrut(10));
-        box1.add(textFieldSum);
-        box1.add(Box.createHorizontalStrut(15));
+    public void dispositionElement(Container pane) {
 
-        Box box2 = Box.createHorizontalBox();
-        box2.add(Box.createHorizontalStrut(15));
-        box2.add(labelStartInterval);
-        box2.add(Box.createHorizontalStrut(10));
-        box2.add(textFieldStartInterval);
-        box2.add(Box.createHorizontalStrut(15));
+        GridBagLayout gridBagLayout = new GridBagLayout();
 
-        Box box3 = Box.createHorizontalBox();
-        box3.add(Box.createHorizontalStrut(15));
-        box3.add(labelEndInterval);
-        box3.add(Box.createHorizontalStrut(15));
-        box3.add(textFieldEndInterval);
-        box3.add(Box.createHorizontalStrut(15));
+        pane.setLayout(gridBagLayout);
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.insets = new Insets(5, 5, 5, 5);
+        constraints.weightx = 1;
 
-        Box box4 = Box.createHorizontalBox();
-        box4.add(Box.createHorizontalStrut(15));
-        box4.add(labelRoot);
-        box4.add(Box.createHorizontalStrut(10));
-        box4.add(buttonAssortRoot);
-        box4.add(Box.createHorizontalStrut(100));
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        JLabel lbl1 = new JLabel("x +");
+        lbl1.setHorizontalAlignment(JLabel.RIGHT);
+        pane.add(lbl1, constraints);
 
-        Box mainBox = Box.createVerticalBox();
-        mainBox.add(Box.createVerticalStrut(10));
-        mainBox.add(box1);
-        mainBox.add(Box.createVerticalStrut(10));
-        mainBox.add(box2);
-        mainBox.add(Box.createVerticalStrut(10));
-        mainBox.add(box3);
-        mainBox.add(Box.createVerticalStrut(10));
-        mainBox.add(box4);
-        mainBox.add(Box.createVerticalStrut(10));
+        constraints.gridx = 1;
+        constraints.gridy = 0;
+        constraints.gridwidth = 1;
+        pane.add(textFieldSecondSummand, constraints);
 
-        setContentPane(mainBox);
+        constraints.gridx = 2;
+        constraints.gridy = 0;
+        JLabel lbl2 = new JLabel("=");
+        lbl2.setHorizontalAlignment(JLabel.CENTER);
+        pane.add(lbl2, constraints);
+
+        constraints.gridx = 3;
+        constraints.gridy = 0;
+        constraints.gridwidth = 1;
+        pane.add(textFieldSum, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        constraints.gridwidth = 1;
+        pane.add(labelStartInterval, constraints);
+        constraints.gridx = 1;
+        constraints.gridy = 1;
+        constraints.gridwidth = 3;
+        pane.add(textFieldStartInterval, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        constraints.gridwidth = 1;
+        pane.add(labelEndInterval, constraints);
+        constraints.gridx = 1;
+        constraints.gridy = 2;
+        constraints.gridwidth = 3;
+        pane.add(textFieldEndInterval, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 3;
+        constraints.gridwidth = 1;
+        pane.add(labelRoot, constraints);
+
+        constraints.gridx = 1;
+        constraints.gridy = 3;
+        constraints.gridwidth = 3;
+        buttonAssortRoot.setPreferredSize(new Dimension(75, 20));
+        pane.add(buttonAssortRoot, constraints);
     }
 
     /**
-     * 
+     * This class use for handling  button.
      */
-    /
-        public class ListenerForButton implements ActionListener {
 
-            public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == buttonAssortRoot) {
+    public class ListenerForButton implements ActionListener {
+        /**
+         * This method for processing press button.
+         *
+         * @param e is the action event.
+         */
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == buttonAssortRoot) {
+                if (textFieldSecondSummand.getValue() == null ||
+                        textFieldSum.getValue() == null ||
+                        textFieldStartInterval.getValue() == null ||
+                        textFieldEndInterval.getValue() == null) {
+                    JOptionPane.showMessageDialog(null, "Заполните поля",
+                            "Ошибка", JOptionPane.ERROR_MESSAGE);
+                } else {
                     secondSummand = Integer.parseInt(textFieldSecondSummand.getValue().toString());
                     sum = Integer.parseInt(textFieldSum.getValue().toString());
                     startInterval = Integer.parseInt(textFieldStartInterval.getValue().toString());
                     endInterval = Integer.parseInt(textFieldEndInterval.getValue().toString());
-                    Main.Solution();
-                    String root = "Корень " + result;
-                    labelRoot.setText(root);
+
+                    if (startInterval > endInterval) {
+                        JOptionPane.showMessageDialog(null, "Недопустимые границы инервала",
+                                "Ошибка", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                    for (int i = startInterval; i <= endInterval; i++) {
+                        if (i == sum - secondSummand) {
+                            result = i;
+                            labelRoot.setBackground(Color.orange);
+                            labelStartInterval.setBackground(Color.orange);
+                            labelEndInterval.setBackground(Color.orange);
+                            String root = "Корень " + result;
+                            labelRoot.setText(root);
+                            break;
+                        } else {
+                            labelRoot.setBackground(Color.red);
+                            labelStartInterval.setBackground(Color.red);
+                            labelEndInterval.setBackground(Color.red);
+                            String root = "Корень ";
+                            labelRoot.setText(root);
+                        }
+                    }
                 }
             }
         }
-
     }
+}
+
+
 
 
 
