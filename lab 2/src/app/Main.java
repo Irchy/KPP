@@ -88,11 +88,12 @@ public class Main extends Application{
 
         workButton.setOnAction(new EventHandler<ActionEvent>(){
             public void handle(ActionEvent e) {
-                sawButton.setDisable(false);
-                screwInButton.setDisable(false);
-                untwineButton.setDisable(false);
-                tryUpButton.setDisable(false);
-
+                if(tableView.getSelectionModel().getSelectedItem() != null) {
+                    sawButton.setDisable(false);
+                    screwInButton.setDisable(false);
+                    untwineButton.setDisable(false);
+                    tryUpButton.setDisable(false);
+                }
             }
         });
 
@@ -101,28 +102,27 @@ public class Main extends Application{
                 if(tableView.getSelectionModel().getSelectedItem().saw == null)
                     tableView.getSelectionModel().getSelectedItem().setSaw(new Saw());
                 tableView.getSelectionModel().getSelectedItem().work("saw", semiFinished);
-                sawButton.setDisable(true);
+                //sawButton.setDisable(true);
                 reactionLabel.setText(Double.toString(semiFinished.form));
             }
         });
 
         tryUpButton.setOnAction(new EventHandler<ActionEvent>(){
-                                    public void handle(ActionEvent e) {
-                                        if(tableView.getSelectionModel().getSelectedItem().plane == null)
-                                            tableView.getSelectionModel().getSelectedItem().setPlane(new Plane());
-                                        tableView.getSelectionModel().getSelectedItem().work("tryUp", semiFinished);
-                                        tryUpButton.setDisable(true);
-                                        reactionLabel.setText(Double.toString(semiFinished.form));
-                                    }
-                                }
-        );
+            public void handle(ActionEvent e) {
+                if(tableView.getSelectionModel().getSelectedItem().plane == null)
+                    tableView.getSelectionModel().getSelectedItem().setPlane(new Plane());
+                tableView.getSelectionModel().getSelectedItem().work("tryUp", semiFinished);
+               // tryUpButton.setDisable(true);
+                reactionLabel.setText(Double.toString(semiFinished.form));
+                }
+        });
 
         screwInButton.setOnAction(new EventHandler<ActionEvent>(){
             public void handle(ActionEvent e) {
                 if(tableView.getSelectionModel().getSelectedItem().screwdriver == null)
                     tableView.getSelectionModel().getSelectedItem().setScrewdriver(new Screwdriver());
                 tableView.getSelectionModel().getSelectedItem().work("screwIn", semiFinished);
-                screwInButton.setDisable(true);
+                //screwInButton.setDisable(true);
             }
         });
 
@@ -131,7 +131,7 @@ public class Main extends Application{
                 if(tableView.getSelectionModel().getSelectedItem().screwdriver == null)
                     tableView.getSelectionModel().getSelectedItem().setScrewdriver(new Screwdriver());
                 tableView.getSelectionModel().getSelectedItem().work("untwine", semiFinished);
-                untwineButton.setDisable(true);
+                //untwineButton.setDisable(true);
 
             }
         });
