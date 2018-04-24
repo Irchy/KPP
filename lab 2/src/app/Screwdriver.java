@@ -2,8 +2,14 @@ package app;
 
 import javafx.scene.control.Alert;
 
+/**
+ * Class for work with semifinished.
+ */
 public class Screwdriver extends Tool {
-
+    /**
+     * Screw in and show message.
+     * @param semiFinished which semifinished change.
+     */
     public void screwIn(SemiFinished semiFinished){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
@@ -14,6 +20,10 @@ public class Screwdriver extends Tool {
         alert.showAndWait();
     }
 
+    /**
+     * Untwine and show message.
+     * @param semiFinished which semifinished change.
+     */
     public void untwine(SemiFinished semiFinished){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
 

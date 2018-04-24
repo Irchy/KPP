@@ -12,18 +12,36 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+/**
+ * Class Main contains
+ *@author Skiba Iryna
+ */
 
 public class Main extends Application{
+    private Saw saw;
+    private Plane plane;
+    private Screwdriver screwdriver;
     private SemiFinished semiFinished;
     private static ObservableList<Worker> listWorker;
     private static TableView<Worker> tableView;
-
+    /**
+     * This is punkt of  login to programm.
+     * Here is parameters for output window.
+     * @param args
+     */
     public static void main(String[] args) {
         Application.launch(args);
     }
 
+    /**
+     * start create appearance application.
+     * @param primaryStage window of app.
+     */
     @Override
     public void start(Stage primaryStage) {
+        saw = new Saw();
+        plane = new Plane();
+        screwdriver = new Screwdriver();
         semiFinished = new SemiFinished(120);
 
         primaryStage.setResizable(false);
@@ -99,40 +117,27 @@ public class Main extends Application{
 
         sawButton.setOnAction(new EventHandler<ActionEvent>(){
             public void handle(ActionEvent e) {
-                if(tableView.getSelectionModel().getSelectedItem().saw == null)
-                    tableView.getSelectionModel().getSelectedItem().setSaw(new Saw());
-                tableView.getSelectionModel().getSelectedItem().work("saw", semiFinished);
-                //sawButton.setDisable(true);
+                 tableView.getSelectionModel().getSelectedItem().work(saw, semiFinished);
                 reactionLabel.setText(Double.toString(semiFinished.form));
             }
         });
 
         tryUpButton.setOnAction(new EventHandler<ActionEvent>(){
             public void handle(ActionEvent e) {
-                if(tableView.getSelectionModel().getSelectedItem().plane == null)
-                    tableView.getSelectionModel().getSelectedItem().setPlane(new Plane());
-                tableView.getSelectionModel().getSelectedItem().work("tryUp", semiFinished);
-               // tryUpButton.setDisable(true);
+                tableView.getSelectionModel().getSelectedItem().work(plane, semiFinished);
                 reactionLabel.setText(Double.toString(semiFinished.form));
                 }
         });
 
         screwInButton.setOnAction(new EventHandler<ActionEvent>(){
             public void handle(ActionEvent e) {
-                if(tableView.getSelectionModel().getSelectedItem().screwdriver == null)
-                    tableView.getSelectionModel().getSelectedItem().setScrewdriver(new Screwdriver());
-                tableView.getSelectionModel().getSelectedItem().work("screwIn", semiFinished);
-                //screwInButton.setDisable(true);
+                tableView.getSelectionModel().getSelectedItem().work(screwdriver, semiFinished,"screwIn");
             }
         });
 
         untwineButton.setOnAction(new EventHandler<ActionEvent>(){
             public void handle(ActionEvent e) {
-                if(tableView.getSelectionModel().getSelectedItem().screwdriver == null)
-                    tableView.getSelectionModel().getSelectedItem().setScrewdriver(new Screwdriver());
-                tableView.getSelectionModel().getSelectedItem().work("untwine", semiFinished);
-                //untwineButton.setDisable(true);
-
+                tableView.getSelectionModel().getSelectedItem().work(screwdriver, semiFinished,"untwine");
             }
         });
 

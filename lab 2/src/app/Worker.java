@@ -1,19 +1,19 @@
 package app;
 
+/**
+ * Worker has field name and override method work.
+ */
 public class Worker {
-    String name;
-    Saw saw;
-    Plane plane;
-    Screwdriver screwdriver;
+    private String name;
 
-    public void work(String flag, SemiFinished semiFinished){
+    /**
+     * method for work with screwdriver
+     * @param screwdriver tool
+     * @param semiFinished semifinished for work
+     * @param flag flag for screwIn or untwine
+     */
+    public void work(Screwdriver screwdriver, SemiFinished semiFinished, String flag){
         switch(flag){
-            case "saw":
-                saw.saw(semiFinished);
-                break;
-            case "tryUp":
-                plane.tryUp(semiFinished);
-                break;
             case "screwIn":
                 screwdriver.screwIn(semiFinished);
                 break;
@@ -23,42 +23,51 @@ public class Worker {
         }
     }
 
-    public Saw getSaw() {
-        return saw;
+    /**
+     * method for work with saw
+     * @param saw tool
+     * @param semiFinished semifinished for work
+     */
+    public void work(Saw saw, SemiFinished semiFinished){
+        saw.saw(semiFinished);
     }
 
-    public void setSaw(Saw saw) {
-        this.saw = saw;
+    /**
+     * method for work with plane
+     * @param plane tool
+     * @param semiFinished semifinished for work
+     */
+    public void work(Plane plane, SemiFinished semiFinished){
+        plane.tryUp(semiFinished);
     }
 
-    public Plane getPlane() {
-        return plane;
-    }
-
-    public void setPlane(Plane plane) {
-        this.plane = plane;
-    }
-
-    public Screwdriver getScrewdriver() {
-        return screwdriver;
-    }
-
-    public void setScrewdriver(Screwdriver screwdriver) {
-        this.screwdriver = screwdriver;
-    }
-
+    /**
+     * default constructor
+     */
     Worker() {
 
     }
 
+    /**
+     * constructor initialization
+     * @param inputName name for initialization
+     */
     Worker(String inputName) {
         this.name = inputName;
     }
 
+    /**
+     * for get name
+     * @return name of worker
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * for set name
+     * @param name for set
+     */
     public void setName(String name) {
         this.name = name;
     }

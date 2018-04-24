@@ -1,21 +1,23 @@
 package app;
 
+/**
+ * Class Tool for create other classes.
+ */
 public class Tool {
-    int weight;
+    private int weight;
 
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
+    /**
+     * default constructor
+     */
     Tool()
     {
         this.weight = 0;
     }
 
+    /**
+     * constructor initialization
+     * @param weight for definition
+     */
     Tool(int weight)
     {
         this.weight = weight;
